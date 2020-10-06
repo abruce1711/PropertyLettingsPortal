@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PropertyLettingsPortal.Interfaces
 {
-    interface IPropertyManagerService
+    public interface IPropertyManagerService
     {
         // Define CRUD operations for property manager
         IEnumerable<PropertyManager> GetAll();

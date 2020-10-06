@@ -1,0 +1,45 @@
+﻿@model PropertyDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <div class="detailTitle">
+        <button class="buttons detailButtons" onclick="window.location.href = '@Url.Content("~/Properties/Index/")';">← Back</button>
+        <h4 id="detailHeading">Details of @Html.DisplayFor(model => model.StreetAddress)</h4>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Manager)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Manager.Name)
+        </dd>
+        <dt class="col-sm-3">
+            Address
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.StreetAddress), @Html.DisplayFor(model => model.City), @Html.DisplayFor(model => model.Postcode)
+        </dd>
+        <dt class="col-sm-3">
+            Cost per calendar month
+        </dt>
+        <dd class="col-sm-9">
+            £@Html.DisplayFor(model => model.CostPM)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-3">
+            Available from
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Available)
+        </dd>
+    </dl>
+</div>
