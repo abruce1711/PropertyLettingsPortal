@@ -1,45 +1,5 @@
-﻿@model PropertyIndexViewModel
-@{
+﻿@{
     ViewData["Title"] = "Home";
 }
 
-<h1>Properties to let</h1>
-<table class="table alertTable" id="alertTable">
-    <thead>
-        <tr>
-            <th>
-                Street Address
-            </th>
-            <th>
-                City
-            </th>
-            <th>
-                Postcode
-            </th>
-            <th>
-                Cost per month
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var item in Model.Properties)
-        {
-            <tr class="alertRow" onclick="window.location.href = '@Url.Content("~/Alerts/Details/" + item.Id)';">
-                <td>
-                    @Html.DisplayFor(modelItem => item.StreetAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Postcode)
-                </td>
-                <td>
-                    £@Html.DisplayFor(modelItem => item.CostPM)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h1>Welcome</h1>
