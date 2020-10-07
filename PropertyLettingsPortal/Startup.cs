@@ -31,6 +31,7 @@ namespace PropertyLettingsPortal
         {
             services.AddScoped<IPropertyService, PropertyService>();
             services.AddScoped<IPropertyManagerService, PropertyManagerService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
