@@ -12,12 +12,6 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-3">
-            @Html.DisplayNameFor(model => model.Manager)
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Manager.Name)
-        </dd>
-        <dt class="col-sm-3">
             Address
         </dt>
         <dd class="col-sm-9">
@@ -40,6 +34,27 @@
         </dt>
         <dd class="col-sm-9">
             @Html.DisplayFor(model => model.Available)
+        </dd>
+    </dl>
+    <h4>Property Manager</h4>
+    <dl class="row">
+        <dt class="col-sm-3">
+            Name
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Manager.Name)
+        </dd>
+        <dt class="col-sm-3">
+            Phone
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Manager.Phone)
+        </dd>
+        <dt class="col-sm-3">
+            Email Address
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Manager.Email)
         </dd>
     </dl>
 </div>

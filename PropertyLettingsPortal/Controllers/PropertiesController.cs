@@ -72,6 +72,11 @@ namespace PropertyLettingsPortal.Controllers
             };
 
             return View(propertyDetailModel);
-    }
+        }
+
+        public IActionResult Enquiry()
+        {
+            return View();
+        }
     }
 }
