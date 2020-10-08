@@ -16,12 +16,12 @@ namespace PropertyLettingsPortal.Services
         private readonly string SmtpUsername = Environment.GetEnvironmentVariable("TTSmtpUsername");
         private readonly string SmtpPassword = Environment.GetEnvironmentVariable("TTSmtpPassword");
 
-        public void Send(string message, string from, Property property)
+        public void Send(string from, string message, string address, string managerName, string managerEmail)
         {
             var email = new MimeMessage();
-            email.To.Add(new MailboxAddress(property.Manager.Name, property.Manager.Email));
+            email.To.Add(new MailboxAddress(managerName, managerEmail));
             email.From.Add(new MailboxAddress("Property Lettings Tech Test", "PLettingsTechTest@gmail.com"));
-            email.Subject = "Lettings Enquiry - " + property.StreetAddress;
+            email.Subject = "Lettings Enquiry from " + from + " - " + address;
             var builder = new BodyBuilder();
             builder.HtmlBody = message;
             email.Body = builder.ToMessageBody();
@@ -29,7 +29,7 @@ namespace PropertyLettingsPortal.Services
             using (var emailClient = new SmtpClient())
             {
                 //The last parameter is to use SSL
-                emailClient.Connect("smtp.google.com", 587, SecureSocketOptions.StartTls);
+                emailClient.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
 
                 //Remove any OAuth functionality as we won't be using it. 
                 emailClient.AuthenticationMechanisms.Remove("XOAUTH2");

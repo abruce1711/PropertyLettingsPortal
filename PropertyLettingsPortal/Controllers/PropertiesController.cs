@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PropertyLettingsPortal.Data.Models;
@@ -13,14 +16,14 @@ namespace PropertyLettingsPortal.Controllers
     public class PropertiesController : Controller
     {
         private readonly IPropertyService _properties;
-        private readonly IPropertyManagerService _managers;
+        private readonly IEmailService _email;
         private readonly ILogger<PropertiesController> _logger;
 
-        public PropertiesController(ILogger<PropertiesController> logger, IPropertyService properties, IPropertyManagerService managers)
+        public PropertiesController(ILogger<PropertiesController> logger, IPropertyService properties, IEmailService email)
         {
             _logger = logger;
             _properties = properties;
-            _managers = managers;
+            _email = email;
         }
 
         // Retrieves list of all properties and converts them to index view models for listing on home page
@@ -58,10 +61,10 @@ namespace PropertyLettingsPortal.Controllers
                 return NotFound();
             }
 
+            // Transposes data from model to view model
             PropertyDetailsViewModel propertyDetailModel = new PropertyDetailsViewModel
             {
                 Id = property.Id,
-                //Manager = _managers.GetById(property.Manager.Id),
                 Manager = property.Manager,
                 StreetAddress = property.StreetAddress,
                 City = property.City,
@@ -74,9 +77,22 @@ namespace PropertyLettingsPortal.Controllers
             return View(propertyDetailModel);
         }
 
-        public IActionResult Enquiry()
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(string message, string managerName, string managerEmail, string address)
         {
-            return View();
+            ClaimsPrincipal currentUser = User;
+            string currentUsername = string.Empty;
+            try
+            {
+                currentUsername = currentUser.FindFirst(ClaimTypes.Name).Value;
+            } catch(NullReferenceException ex)
+            {
+                currentUsername = "Unknown";
+            }        
+
+            _email.Send(currentUsername, message, address, managerName, managerEmail);
+            return Redirect("/Properties");
         }
     }
 }

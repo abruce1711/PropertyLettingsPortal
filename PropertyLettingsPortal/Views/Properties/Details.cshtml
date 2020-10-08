@@ -57,4 +57,21 @@
             @Html.DisplayFor(model => model.Manager.Email)
         </dd>
     </dl>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div id="enquiry_form">
+            <h4>Make a note of interest or enquiry</h4>
+            <form asp-controller="Properties" asp-action="Details" method="post">
+                <p>Message:</p>
+                <input type="hidden" name="managerName" value="@Html.DisplayFor(model => model.Manager.Name)" />
+                <input type="hidden" name="managerEmail" value="@Html.DisplayFor(model => model.Manager.Email)" />
+                <input type="hidden" name="address" value="@Html.DisplayFor(model => model.StreetAddress)" />
+                <textarea name="message" rows="5" cols="60"></textarea>
+                <input type="submit" />
+            </form>
+        </div>
+    } else
+    {
+        <a href="/Identity/Account/Login"><button>Make Enquiry</button></a>
+    }
 </div>

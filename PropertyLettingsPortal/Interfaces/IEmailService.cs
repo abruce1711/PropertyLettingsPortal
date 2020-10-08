@@ -8,6 +8,6 @@ namespace PropertyLettingsPortal.Interfaces
 {
     public interface IEmailService
     {
-        void Send(string message, string from, Property property);
+        void Send(string from, string message, string address, string managerName, string managerEmail);
     }
 }
